@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AppPA</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="entrar">Entrar</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="inserir">Inserir</string>
+    <string name="carregando">Carregando</string>
+    <string name="erroLogin">E-mail ou senha inválidos!</string>
+    <string name="nomeAlbum">Nome do álbum</string>
+</resources>
