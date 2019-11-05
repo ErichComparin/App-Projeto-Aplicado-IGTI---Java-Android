@@ -1,5 +1,6 @@
 package app.ec.com.apppa.LayerView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
@@ -7,8 +8,16 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+
+import java.io.IOException;
 
 import app.ec.com.apppa.FotoListViewModel;
 import app.ec.com.apppa.LayerModel.Album;
@@ -21,6 +30,7 @@ public class FotoListActivity extends AppCompatActivity {
     ActivityFotoListBinding binding;
     FotoListViewModel fotoListViewModel;
     RecyclerView mFotoRecyclerView;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,4 +74,32 @@ public class FotoListActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onInsClick(View view){
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            Uri uri = null;
+            try{
+                uri = fotoListViewModel.createImageFile(this.getBaseContext());
+            } catch (IOException ex){
+                Log.i("eccc", ex.toString());
+            }
+            if (uri != null) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            };
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            fotoListViewModel.onInsClick(getExternalFilesDir(Environment.DIRECTORY_PICTURES), imageBitmap);
+        }
+    }
+
 }

@@ -47,20 +47,4 @@ public class FotoLineAdapter extends RecyclerView.Adapter<FotoLineHolder> {
         return mFotos != null ? mFotos.size() : 0;
     }
 
-    /*private Bitmap getImageBitmap(String url) {
-        Bitmap bm = null;
-        try {
-            URL aURL = new URL(url);
-            URLConnection conn = aURL.openConnection();
-            conn.connect();
-            InputStream is = conn.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            bm = BitmapFactory.decodeStream(bis);
-            bis.close();
-            is.close();
-        } catch (IOException e) {
-            Log.i("eccc", "Error getting bitmap: " + e);
-        }
-        return bm;
-    }*/
 }
