@@ -3,6 +3,7 @@ package app.ec.com.apppa;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.core.content.FileProvider;
 import androidx.databinding.ObservableField;
@@ -23,7 +24,6 @@ public class FotoListViewModel implements Observer {
     private FirebaseHelper fbHelper = getInstance();
     public ObservableField<Album> album = new ObservableField<>();
     private int mPos;
-    //private String currentPhotoPath;
     private File storageDir;
 
     public void onCreate(int pos){
@@ -41,7 +41,7 @@ public class FotoListViewModel implements Observer {
         storageDir = pStorageDir;
     }
 
-    public Uri createImageFile(Context context) throws IOException {
+    public Uri createImageFile(Context context, File storageDir) throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
@@ -52,11 +52,9 @@ public class FotoListViewModel implements Observer {
         );
 
         Uri photoURI = FileProvider.getUriForFile(context,
-                "${applicationId}.fileprovider",
+                "app.ec.com.apppa.fileprovider",
                 image);
 
-        // Save a file: path for use with ACTION_VIEW intents
-        //currentPhotoPath = image.getAbsolutePath();
         return photoURI;
     }
 }

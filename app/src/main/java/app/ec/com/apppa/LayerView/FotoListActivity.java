@@ -2,13 +2,17 @@ package app.ec.com.apppa.LayerView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -81,11 +85,20 @@ public class FotoListActivity extends AppCompatActivity {
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             Uri uri = null;
             try{
-                uri = fotoListViewModel.createImageFile(this.getBaseContext());
+                uri = fotoListViewModel.createImageFile(this.getBaseContext(), getExternalFilesDir(Environment.DIRECTORY_PICTURES));
             } catch (IOException ex){
                 Log.i("eccc", ex.toString());
             }
             if (uri != null) {
+                if (ContextCompat.checkSelfPermission(this.getBaseContext(),
+                        Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(FotoListActivity.this,
+                            new String[]{Manifest.permission.CAMERA},
+                            REQUEST_IMAGE_CAPTURE);
+                }
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             };
