@@ -1,7 +1,6 @@
 package app.ec.com.apppa;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 
@@ -15,10 +14,10 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
-import app.ec.com.apppa.Firebase.FirebaseHelper;
+import app.ec.com.apppa.Helpers.FirebaseHelper;
 import app.ec.com.apppa.LayerModel.Album;
 
-import static app.ec.com.apppa.Firebase.FirebaseHelper.getInstance;
+import static app.ec.com.apppa.Helpers.FirebaseHelper.getInstance;
 
 public class FotoListViewModel implements Observer {
     private FirebaseHelper fbHelper = getInstance();
@@ -37,24 +36,4 @@ public class FotoListViewModel implements Observer {
         album.set(fbHelper.retAlbum(mPos));
     }
 
-    public void onInsClick(File pStorageDir, Bitmap imageBitmap){
-        storageDir = pStorageDir;
-    }
-
-    public Uri createImageFile(Context context, File storageDir) throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",   /* suffix */
-                storageDir      /* directory */
-        );
-
-        Uri photoURI = FileProvider.getUriForFile(context,
-                "app.ec.com.apppa.fileprovider",
-                image);
-
-        return photoURI;
-    }
 }

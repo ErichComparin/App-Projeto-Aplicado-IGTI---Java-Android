@@ -8,4 +8,5 @@
     <string name="carregando">Carregando</string>
     <string name="erroLogin">E-mail ou senha inválidos!</string>
     <string name="nomeAlbum">Nome do álbum</string>
+    <string name="file_provider_authority" translatable="false">app.ec.com.apppa.fileprovider</string>
 </resources>

@@ -1,6 +1,4 @@
-package app.ec.com.apppa.Firebase;
-
-import android.util.Log;
+package app.ec.com.apppa.Helpers;
 
 import androidx.annotation.NonNull;
 

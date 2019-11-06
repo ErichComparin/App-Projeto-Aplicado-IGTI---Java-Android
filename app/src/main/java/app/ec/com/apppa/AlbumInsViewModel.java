@@ -2,9 +2,9 @@ package app.ec.com.apppa;
 
 import androidx.databinding.ObservableField;
 
-import app.ec.com.apppa.Firebase.FirebaseHelper;
+import app.ec.com.apppa.Helpers.FirebaseHelper;
 
-import static app.ec.com.apppa.Firebase.FirebaseHelper.getInstance;
+import static app.ec.com.apppa.Helpers.FirebaseHelper.getInstance;
 
 public class AlbumInsViewModel {
     public ObservableField<String> albumNome = new ObservableField<>();
