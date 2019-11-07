@@ -13,7 +13,7 @@ public class AlbumInsViewModel {
         String mAlbumNome = albumNome.get();
         FirebaseHelper fbHelper = getInstance();
 
-        fbHelper.insUsuario(mAlbumNome);
+        fbHelper.insAlbum(mAlbumNome);
 
     }
 }
