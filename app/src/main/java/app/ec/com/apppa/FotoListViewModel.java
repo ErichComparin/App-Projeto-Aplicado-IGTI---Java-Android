@@ -23,6 +23,7 @@ import java.util.Observer;
 import app.ec.com.apppa.Helpers.FirebaseHelper;
 import app.ec.com.apppa.Helpers.PermissionManager;
 import app.ec.com.apppa.LayerModel.Album;
+import app.ec.com.apppa.LayerView.CompartilhamentoActivity;
 
 import static app.ec.com.apppa.Helpers.FirebaseHelper.getInstance;
 
@@ -45,13 +46,12 @@ public class FotoListViewModel implements Observer {
         album.set(fbHelper.retAlbum(mPos));
     }
 
-    public String onInsClick(Context context, Activity activity){
+    public void onInsClick(Context context, Activity activity){
         if (permissionManager.userHasPermission(context)) {
             takePicture(context, activity);
         } else {
             permissionManager.requestPermission(activity);
         }
-        return path;
     }
 
     private void takePicture(Context context, Activity activity) {
@@ -86,5 +86,10 @@ public class FotoListViewModel implements Observer {
 
     public void insFotoFB(){
         fbHelper.insFoto(path, mPos);
+    }
+
+    public void onCompartilharClick(Activity activity){
+        activity.startActivity(
+                new Intent(activity, CompartilhamentoActivity.class));
     }
 }

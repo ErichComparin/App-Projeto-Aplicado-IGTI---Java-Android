@@ -1,6 +1,5 @@
 package app.ec.com.apppa.RecyclerViews;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 

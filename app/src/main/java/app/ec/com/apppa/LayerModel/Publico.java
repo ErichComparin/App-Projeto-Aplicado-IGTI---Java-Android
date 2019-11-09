@@ -3,20 +3,20 @@ package app.ec.com.apppa.LayerModel;
 import java.util.ArrayList;
 
 public class Publico {
-    private ArrayList<UsuarioPub> albuns = new ArrayList();
+    private ArrayList<UsuarioPub> usuarios = new ArrayList();
 
     public Publico() {
     }
 
-    public Publico(ArrayList<UsuarioPub> albuns) {
-        this.albuns = albuns;
+    public Publico(ArrayList<UsuarioPub> usuarios) {
+        this.usuarios = usuarios;
     }
 
-    public ArrayList<UsuarioPub> getAlbuns() {
-        return albuns;
+    public ArrayList<UsuarioPub> getUsuarios() {
+        return usuarios;
     }
 
-    public void setAlbuns(ArrayList<UsuarioPub> albuns) {
-        this.albuns = albuns;
+    public void setUsuarios(ArrayList<UsuarioPub> usuarios) {
+        this.usuarios = usuarios;
     }
 }

@@ -31,6 +31,7 @@ import app.ec.com.apppa.LayerModel.Album;
 import app.ec.com.apppa.LayerModel.Imagem;
 import app.ec.com.apppa.LayerModel.Publico;
 import app.ec.com.apppa.LayerModel.Usuario;
+import app.ec.com.apppa.LayerModel.UsuarioPub;
 
 public class FirebaseHelper extends Observable{
 
@@ -204,8 +205,8 @@ public class FirebaseHelper extends Observable{
 
     //--PÚBLICO-----------------------------
 
-    public Publico getPublico() {
-        return publicoRD;
+    public ArrayList<UsuarioPub> getUsuariosPub() {
+        return publicoRD.getUsuarios();
     }
 }
 

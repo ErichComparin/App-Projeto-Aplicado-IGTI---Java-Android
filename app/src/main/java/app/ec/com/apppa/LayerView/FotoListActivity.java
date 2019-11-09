@@ -97,4 +97,8 @@ public class FotoListActivity extends AppCompatActivity {
         }
     }
 
+    public void onCompartilharClick(View view){
+        fotoListViewModel.onCompartilharClick(FotoListActivity.this);
+    }
+
 }
