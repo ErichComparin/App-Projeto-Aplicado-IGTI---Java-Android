@@ -17,7 +17,6 @@ public class FotoLineHolder extends RecyclerView.ViewHolder {
     public FotoLineHolder(View itemView) {
         super(itemView);
 
-        foto = (TextView) itemView.findViewById(R.id.foto);
         imagem = (ImageView) itemView.findViewById(R.id.imagem);
     }
 

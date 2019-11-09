@@ -1,5 +1,7 @@
 package app.ec.com.apppa;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
@@ -39,6 +41,7 @@ public class LoginViewModel {
                         if (task.isSuccessful()){
                             isLoginDone.set(true);
                         }else {
+                            Log.e("ECERR_LoginViewMode1", task.getException().toString());
                             loadingVisibility.set(false);
                             errorVisibility.set(true);
                         }

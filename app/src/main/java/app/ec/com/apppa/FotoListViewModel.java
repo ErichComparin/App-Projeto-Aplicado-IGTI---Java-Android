@@ -23,7 +23,6 @@ import java.util.Observer;
 import app.ec.com.apppa.Helpers.FirebaseHelper;
 import app.ec.com.apppa.Helpers.PermissionManager;
 import app.ec.com.apppa.LayerModel.Album;
-import app.ec.com.apppa.LayerView.FotoListActivity;
 
 import static app.ec.com.apppa.Helpers.FirebaseHelper.getInstance;
 
@@ -38,7 +37,7 @@ public class FotoListViewModel implements Observer {
     public void onCreate(int pos){
         mPos = pos;
         album.set(fbHelper.retAlbum(mPos));
-        fbHelper.registrarObserver(this);
+        fbHelper.registrarObserverUsuarioRD(this);
     }
 
     @Override
@@ -79,8 +78,7 @@ public class FotoListViewModel implements Observer {
     }
 
     public File createImageFileWith() throws IOException {
-        final String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        final String imageFileName = "JPEG_" + timestamp;
+        final String imageFileName = "JPEG_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "AppPA");
         storageDir.mkdirs();
         return File.createTempFile(imageFileName, ".jpg", storageDir);

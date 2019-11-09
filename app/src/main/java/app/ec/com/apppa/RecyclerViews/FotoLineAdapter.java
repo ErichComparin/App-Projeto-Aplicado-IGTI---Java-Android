@@ -2,6 +2,8 @@ package app.ec.com.apppa.RecyclerViews;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -38,8 +41,9 @@ public class FotoLineAdapter extends RecyclerView.Adapter<FotoLineHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull FotoLineHolder holder, int position) {
-        holder.foto.setText(mFotos.get(position).getLink());
-        Picasso.get().load(mFotos.get(position).getLink()).into(holder.imagem);
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "AppPA");
+        File localFile = new File(storageDir, mFotos.get(position).getLink());
+        holder.imagem.setImageURI(Uri.fromFile(localFile));
     }
 
     @Override

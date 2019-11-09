@@ -38,11 +38,10 @@ public class SigninViewModel {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Log.e("eccc", "Suc");
                             isSignDone.set(true);
                         }else {
                             Exception e = task.getException();
-                            Log.e("eccc", "Err: " + e.getMessage());
+                            Log.e("ECERR_SigninViewModel1", e.getMessage());
                             loadingVisibility.set(false);
                             errorVisibility.set(true);
                         }

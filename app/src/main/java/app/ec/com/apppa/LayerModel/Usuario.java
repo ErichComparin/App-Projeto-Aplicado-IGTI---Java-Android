@@ -25,6 +25,10 @@ public class Usuario {
         return albuns;
     }
 
+    public Album getAlbum(int pos) {
+        return albuns.get(pos);
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

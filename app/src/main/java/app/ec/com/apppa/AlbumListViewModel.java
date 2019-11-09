@@ -17,7 +17,7 @@ public class AlbumListViewModel implements Observer {
 
     public void onCreate(){
         albuns.set(fbHelper.retAlbuns());
-        fbHelper.registrarObserver(this);
+        fbHelper.registrarObserverUsuarioRD(this);
     }
 
     @Override
