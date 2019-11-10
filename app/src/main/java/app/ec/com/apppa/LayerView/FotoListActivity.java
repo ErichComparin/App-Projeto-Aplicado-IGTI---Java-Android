@@ -8,6 +8,7 @@ import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -70,7 +71,8 @@ public class FotoListActivity extends AppCompatActivity {
 
         mFotoRecyclerView = (RecyclerView) findViewById(R.id.fotoRecyclerView);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new GridLayoutManager(this, 3);
         mFotoRecyclerView.setLayoutManager(layoutManager);
 
     }
