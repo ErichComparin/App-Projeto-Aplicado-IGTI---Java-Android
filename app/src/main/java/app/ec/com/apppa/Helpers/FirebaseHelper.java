@@ -178,6 +178,8 @@ public class FirebaseHelper extends Observable{
         final DatabaseReference refUsuario = getRefUsuario();
         usuarioRD.getAlbum(albumPos).addImagem(new Imagem(link));
         refUsuario.setValue(usuarioRD);
+
+        insFotoBE(usuarioRD.getAlbum(albumPos).getId(), link);
     }
 
     public void downloadFoto(String link) throws IOException {
@@ -211,12 +213,106 @@ public class FirebaseHelper extends Observable{
     }
 
     public void insCompartilhamento(CompartilhamentoPub compartilhamento){
-        final DatabaseReference refPublico = getRefPublico();
-        compartilhamento.setDe(getFirebaseUser().getUid());
 
-        publicoRD.addCompartilhamento(compartilhamento);
+        boolean isCompartilhado = false;
 
-        refPublico.setValue(publicoRD);
+        for (CompartilhamentoPub comp : publicoRD.getCompartilhamentos()){
+            if (comp.getPara().equals(compartilhamento.getPara()) &&
+                    comp.getAlbum_id().equals(compartilhamento.getAlbum_id())){
+                isCompartilhado = true;
+                break;
+            }
+        }
+
+        if (!isCompartilhado) {
+            compartilhamento.setDe(getFirebaseUser().getUid());
+
+            final DatabaseReference refPublico = getRefPublico();
+            publicoRD.addCompartilhamento(compartilhamento);
+            refPublico.setValue(publicoRD);
+
+            insCompartilhamentoBE(compartilhamento);
+        }
+
+    }
+
+    //--BACKEND-----------------------------
+    //--MIGRAR PARA FIREBASE CLOUD FUNCTIONS
+
+    public void insCompartilhamentoBE(CompartilhamentoPub compartilhamento){
+        FirebaseDatabase dbComp = FirebaseDatabase.getInstance();
+        final DatabaseReference refComp = dbComp.getReference().child(compartilhamento.getPara());
+        Album albumComp = new Album();
+
+        for (Album album : usuarioRD.getAlbuns()) {
+            if (album.getId().equals(compartilhamento.getAlbum_id())) {
+                albumComp = album;
+                break;
+            }
+        }
+
+        final Album albumCompFinal = albumComp;
+
+        refComp.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Usuario usuarioCompRD = dataSnapshot.getValue(Usuario.class);
+                    usuarioCompRD.addAlbum(albumCompFinal);
+                    refComp.setValue(usuarioCompRD);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
+    }
+
+    public void insFotoBE(String albumId, String link){
+        ArrayList<String> usuariosId = new ArrayList();
+
+        for (CompartilhamentoPub comp : publicoRD.getCompartilhamentos()){
+            if (!comp.getPara().equals(getFirebaseUser().getUid()) &&
+                    comp.getAlbum_id().equals(albumId)){
+                usuariosId.add(comp.getPara());
+            }
+        }
+
+        for (String usuarioId : usuariosId){
+            insFotoUsuarioBE(usuarioId, albumId, link);
+        }
+
+    }
+
+    public void insFotoUsuarioBE(String usuarioId, String albumId, String link){
+        FirebaseDatabase dbUsuario = FirebaseDatabase.getInstance();
+        final DatabaseReference refUsuario = dbUsuario.getReference().child(usuarioId);
+        final String albumIdFinal = albumId;
+        final String linkFinal = link;
+
+        refUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Usuario usuarioRD = dataSnapshot.getValue(Usuario.class);
+                    for (Album album : usuarioRD.getAlbuns()){
+                        if (album.getId().equals(albumIdFinal)){
+                            album.addImagem(new Imagem(linkFinal));
+                        }
+                    }
+                    refUsuario.setValue(usuarioRD);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
+
+
     }
 }
 
