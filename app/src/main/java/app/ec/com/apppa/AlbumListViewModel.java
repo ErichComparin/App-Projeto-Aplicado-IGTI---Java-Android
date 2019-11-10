@@ -12,7 +12,7 @@ import app.ec.com.apppa.LayerModel.Album;
 import static app.ec.com.apppa.Helpers.FirebaseHelper.getInstance;
 
 public class AlbumListViewModel implements Observer {
-    private FirebaseHelper fbHelper = getInstance(); // instancia classe para iniciar listener do Firebase
+    private FirebaseHelper fbHelper = getInstance(); // instancia classe para iniciar listeners do Firebase
     public ObservableField<ArrayList<Album>> albuns = new ObservableField<>();
 
     public void onCreate(){

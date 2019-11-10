@@ -11,6 +11,11 @@ public class AlbumInsViewModel {
 
     public void onInsert() {
         String mAlbumNome = albumNome.get();
+
+        if (mAlbumNome.equals("")){
+            return;
+        }
+
         FirebaseHelper fbHelper = getInstance();
 
         fbHelper.insAlbum(mAlbumNome);

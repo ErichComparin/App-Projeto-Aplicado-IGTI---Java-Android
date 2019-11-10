@@ -311,7 +311,28 @@ public class FirebaseHelper extends Observable{
                 throw databaseError.toException();
             }
         });
+    }
 
+    public void insUsuarioBE(String nome, String usuarioId){
+        final DatabaseReference refPublico = getRefPublico();
+        publicoRD.addUsuario(new UsuarioPub(nome, usuarioId));
+        refPublico.setValue(publicoRD);
+        final String nomeFinal = nome;
+
+        FirebaseDatabase dbUsuario = FirebaseDatabase.getInstance();
+        final DatabaseReference refUsuario = dbUsuario.getReference().child(usuarioId);
+
+        refUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                refUsuario.setValue(new Usuario(nomeFinal));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                throw databaseError.toException();
+            }
+        });
 
     }
 }
