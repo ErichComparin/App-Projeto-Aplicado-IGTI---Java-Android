@@ -2,6 +2,7 @@ package app.ec.com.apppa.RecyclerViews;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import app.ec.com.apppa.Helpers.FirebaseHelper;
+import app.ec.com.apppa.LayerModel.CompartilhamentoPub;
 import app.ec.com.apppa.LayerModel.UsuarioPub;
 import app.ec.com.apppa.R;
+
+import static app.ec.com.apppa.Helpers.FirebaseHelper.getInstance;
 
 public class CompartilhamentoLineAdapter extends RecyclerView.Adapter<CompartilhamentoLineHolder>{
 
     private final List<UsuarioPub> mUsuariosPub;
+    private String mId_album;
 
-    public CompartilhamentoLineAdapter(List<UsuarioPub> usuariosPub) {
+    public CompartilhamentoLineAdapter(List<UsuarioPub> usuariosPub, String id_album) {
         this.mUsuariosPub = usuariosPub;
+        this.mId_album = id_album;
     }
 
     @NonNull
@@ -35,15 +42,15 @@ public class CompartilhamentoLineAdapter extends RecyclerView.Adapter<Compartilh
     public void onBindViewHolder(@NonNull CompartilhamentoLineHolder holder, final int position) {
         holder.nome.setText(mUsuariosPub.get(position).getNome());
 
-        /*holder.linha.setOnClickListener(new View.OnClickListener(){
+        holder.btnCompartilhar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, FotoListActivity.class);
-                intent.putExtra("POS", position);
-                context.startActivity(intent);
+                FirebaseHelper fbHelper = getInstance();
+                fbHelper.insCompartilhamento(new CompartilhamentoPub("",
+                        mUsuariosPub.get(position).getId(),
+                        mId_album));
             }
-        });*/
+        });
     }
 
     @Override

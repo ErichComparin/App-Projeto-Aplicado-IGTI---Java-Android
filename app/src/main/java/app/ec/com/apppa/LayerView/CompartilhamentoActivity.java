@@ -23,6 +23,7 @@ public class CompartilhamentoActivity extends AppCompatActivity {
     ActivityCompartilhamentoBinding binding;
     CompartilhamentoViewModel compartilhamentoViewModel;
     RecyclerView mUsuariosRecyclerView;
+    private String mId_album;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class CompartilhamentoActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_compartilhamento);
         binding.setViewModel(compartilhamentoViewModel);
         binding.executePendingBindings();
+
+        mId_album = getIntent().getStringExtra("ID_ALBUM");
 
         setupAlbumRecycler();
         loadObservables();
@@ -55,13 +58,14 @@ public class CompartilhamentoActivity extends AppCompatActivity {
         );
 
     }
+
     public void loadObservables() {
 
         binding.getViewModel().usuariosPub.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 ArrayList<UsuarioPub> usuariosPub = binding.getViewModel().usuariosPub.get();
-                CompartilhamentoLineAdapter mAdapter = new CompartilhamentoLineAdapter(usuariosPub);
+                CompartilhamentoLineAdapter mAdapter = new CompartilhamentoLineAdapter(usuariosPub, mId_album);
                 mUsuariosRecyclerView.setAdapter(mAdapter);
             }
         });

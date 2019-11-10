@@ -28,6 +28,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import app.ec.com.apppa.LayerModel.Album;
+import app.ec.com.apppa.LayerModel.CompartilhamentoPub;
 import app.ec.com.apppa.LayerModel.Imagem;
 import app.ec.com.apppa.LayerModel.Publico;
 import app.ec.com.apppa.LayerModel.Usuario;
@@ -207,6 +208,15 @@ public class FirebaseHelper extends Observable{
 
     public ArrayList<UsuarioPub> getUsuariosPub() {
         return publicoRD.getUsuarios();
+    }
+
+    public void insCompartilhamento(CompartilhamentoPub compartilhamento){
+        final DatabaseReference refPublico = getRefPublico();
+        compartilhamento.setDe(getFirebaseUser().getUid());
+
+        publicoRD.addCompartilhamento(compartilhamento);
+
+        refPublico.setValue(publicoRD);
     }
 }
 

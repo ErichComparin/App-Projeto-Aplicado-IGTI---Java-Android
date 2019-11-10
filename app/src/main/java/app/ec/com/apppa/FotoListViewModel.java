@@ -89,7 +89,10 @@ public class FotoListViewModel implements Observer {
     }
 
     public void onCompartilharClick(Activity activity){
-        activity.startActivity(
-                new Intent(activity, CompartilhamentoActivity.class));
+
+        Intent intent = new Intent(activity, CompartilhamentoActivity.class);
+
+        intent.putExtra("ID_ALBUM", album.get().getId());
+        activity.startActivity(intent);
     }
 }
