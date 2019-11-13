@@ -1,8 +1,10 @@
-package app.ec.com.apppa;
+package app.ec.com.apppa.LayerView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import app.ec.com.apppa.R;
 
 public class FotoActivity extends AppCompatActivity {
 
