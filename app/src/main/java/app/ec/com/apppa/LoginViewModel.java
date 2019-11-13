@@ -39,6 +39,7 @@ public class LoginViewModel {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()){
+                            loadingVisibility.set(false);
                             isLoginDone.set(true);
                         }else {
                             Log.e("ECERR_LoginViewMode1", task.getException().toString());

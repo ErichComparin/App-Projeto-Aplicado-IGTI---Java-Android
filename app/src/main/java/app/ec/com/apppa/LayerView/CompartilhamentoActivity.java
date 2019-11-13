@@ -1,6 +1,7 @@
 package app.ec.com.apppa.LayerView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ public class CompartilhamentoActivity extends AppCompatActivity {
     ActivityCompartilhamentoBinding binding;
     CompartilhamentoViewModel compartilhamentoViewModel;
     RecyclerView mUsuariosRecyclerView;
-    private String mId_album;
+    private String mIdAlbum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +39,22 @@ public class CompartilhamentoActivity extends AppCompatActivity {
         binding.setViewModel(compartilhamentoViewModel);
         binding.executePendingBindings();
 
-        mId_album = getIntent().getStringExtra("ID_ALBUM");
+        mIdAlbum = getIntent().getStringExtra("ID_ALBUM");
+        String mNomeAlbum = getIntent().getStringExtra("NOME_ALBUM");
 
         setupAlbumRecycler();
         loadObservables();
 
-        compartilhamentoViewModel.onCreate();
+        compartilhamentoViewModel.onCreate(mNomeAlbum);
 
+        // Toolbar - botão voltar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 
     private void setupAlbumRecycler(){
@@ -65,9 +76,18 @@ public class CompartilhamentoActivity extends AppCompatActivity {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 ArrayList<UsuarioPub> usuariosPub = binding.getViewModel().usuariosPub.get();
-                CompartilhamentoLineAdapter mAdapter = new CompartilhamentoLineAdapter(usuariosPub, mId_album);
+                CompartilhamentoLineAdapter mAdapter = new CompartilhamentoLineAdapter(usuariosPub, mIdAlbum);
                 mUsuariosRecyclerView.setAdapter(mAdapter);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // volta para a Activity anterior
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

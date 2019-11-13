@@ -16,12 +16,12 @@ public class AlbumListViewModel implements Observer {
     public ObservableField<ArrayList<Album>> albuns = new ObservableField<>();
 
     public void onCreate(){
-        albuns.set(fbHelper.retAlbuns());
+        albuns.set(fbHelper.retAlbunsReverse());
         fbHelper.registrarObserverUsuarioRD(this);
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        albuns.set(fbHelper.retAlbuns());
+        albuns.set(fbHelper.retAlbunsReverse());
     }
 }

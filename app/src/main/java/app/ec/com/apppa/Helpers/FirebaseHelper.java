@@ -1,5 +1,8 @@
 package app.ec.com.apppa.Helpers;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -20,9 +23,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -144,6 +151,10 @@ public class FirebaseHelper extends Observable{
         return usuarioRD.getAlbuns();
     }
 
+    public ArrayList<Album> retAlbunsReverse(){
+        return reverseList(retAlbuns());
+    }
+
     public Album retAlbum(int pos){
         ArrayList<Album> albuns = retAlbuns();
         Album album = albuns.get(pos);
@@ -160,6 +171,7 @@ public class FirebaseHelper extends Observable{
         Uri file = Uri.fromFile(new File(path));
         StorageReference imgsRef = storageRef.child(file.getLastPathSegment());
         UploadTask uploadTask = imgsRef.putFile(file);
+        final String pathFinal = path;
 
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -170,8 +182,31 @@ public class FirebaseHelper extends Observable{
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 insFotoRD(taskSnapshot.getMetadata().getName());
+                insThumb(pathFinal);
             }
         });
+    }
+
+    public void insThumb(String path){
+        final int THUMBSIZE = 128;
+        try{
+            Bitmap thumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(path),
+                    THUMBSIZE, THUMBSIZE);
+            saveBitmap(thumbImage, path);
+        }catch(Exception exception) {
+            Log.e("ECERR_FirebaseHelper3", exception.getMessage());
+        }
+        notificarObserversUsuarioRD();
+    }
+
+    public void saveBitmap(Bitmap bmp, String path) throws IOException {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        File f = new File(path.replace(".jpg", "_THUMB.jpg"));
+        f.createNewFile();
+        FileOutputStream fo = new FileOutputStream(f);
+        fo.write(bytes.toByteArray());
+        fo.close();
     }
 
     private void insFotoRD(String link){
@@ -188,12 +223,14 @@ public class FirebaseHelper extends Observable{
         StorageReference fotoRef = storageRef.child(link);
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "AppPA");
         File localFile = new File(storageDir, link);
+        final String pathFinal = localFile.getPath();
 
         if (!localFile.exists()){
             fotoRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    notificarObserversUsuarioRD();
+                    insThumb(pathFinal);
+                    //notificarObserversUsuarioRD();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -334,6 +371,18 @@ public class FirebaseHelper extends Observable{
             }
         });
 
+    }
+
+    //--UTILS---------------------
+    public static <T> ArrayList<T> reverseList(ArrayList<T> list) {
+        int length = list.size();
+        ArrayList<T> result = new ArrayList<T>(length);
+
+        for (int i = length - 1; i >= 0; i--) {
+            result.add(list.get(i));
+        }
+
+        return result;
     }
 }
 

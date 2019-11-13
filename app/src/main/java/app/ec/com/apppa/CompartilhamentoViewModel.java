@@ -14,8 +14,10 @@ import static app.ec.com.apppa.Helpers.FirebaseHelper.getInstance;
 public class CompartilhamentoViewModel implements Observer {
     private FirebaseHelper fbHelper = getInstance(); // instancia classe para iniciar listener do Firebase
     public ObservableField<ArrayList<UsuarioPub>> usuariosPub = new ObservableField<>();
+    public ObservableField<String> toolbarTitulo = new ObservableField<>();
 
-    public void onCreate(){
+    public void onCreate(String nomeAlbum){
+        toolbarTitulo.set(nomeAlbum);
         usuariosPub.set(fbHelper.getUsuariosPub());
         fbHelper.registrarObserverPublicoRD(this);
     }

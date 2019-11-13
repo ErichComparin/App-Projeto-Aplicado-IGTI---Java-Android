@@ -42,7 +42,7 @@ public class FotoLineAdapter extends RecyclerView.Adapter<FotoLineHolder> {
     @Override
     public void onBindViewHolder(@NonNull FotoLineHolder holder, int position) {
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "AppPA");
-        File localFile = new File(storageDir, mFotos.get(position).getLink());
+        File localFile = new File(storageDir, mFotos.get(position).retThumb());
         holder.imagem.setImageURI(Uri.fromFile(localFile));
     }
 

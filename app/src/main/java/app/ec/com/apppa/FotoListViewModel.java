@@ -34,10 +34,12 @@ public class FotoListViewModel implements Observer {
     final PermissionManager permissionManager = new PermissionManager();
     private static final int PHOTO_REQUEST_CODE = 102;
     private String path;
+    public ObservableField<String> toolbarTitulo = new ObservableField<>();
 
     public void onCreate(int pos){
         mPos = pos;
         album.set(fbHelper.retAlbum(mPos));
+        toolbarTitulo.set(album.get().getNome());
         fbHelper.registrarObserverUsuarioRD(this);
     }
 
@@ -93,6 +95,7 @@ public class FotoListViewModel implements Observer {
         Intent intent = new Intent(activity, CompartilhamentoActivity.class);
 
         intent.putExtra("ID_ALBUM", album.get().getId());
+        intent.putExtra("NOME_ALBUM", album.get().getNome());
         activity.startActivity(intent);
     }
 }

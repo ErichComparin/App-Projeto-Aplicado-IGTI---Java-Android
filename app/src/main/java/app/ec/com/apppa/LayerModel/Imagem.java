@@ -27,6 +27,10 @@ public class Imagem {
         return link;
     }
 
+    public String retThumb(){
+        return getLink().replace(".jpg", "_THUMB.jpg");
+    }
+
     public void setLink(String link) {
         this.link = link;
     }

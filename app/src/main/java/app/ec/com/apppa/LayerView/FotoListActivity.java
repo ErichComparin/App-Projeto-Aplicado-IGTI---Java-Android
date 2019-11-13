@@ -2,6 +2,7 @@ package app.ec.com.apppa.LayerView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -25,6 +26,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.io.File;
@@ -65,13 +67,21 @@ public class FotoListActivity extends AppCompatActivity {
         loadObservables();
 
         fotoListViewModel.onCreate(getIntent().getIntExtra("POS", 0));
+
+        // Toolbar - botão voltar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 
     private void setupFotoRecycler(){
 
         mFotoRecyclerView = (RecyclerView) findViewById(R.id.fotoRecyclerView);
 
-        //LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         LinearLayoutManager layoutManager = new GridLayoutManager(this, 3);
         mFotoRecyclerView.setLayoutManager(layoutManager);
 
@@ -82,7 +92,7 @@ public class FotoListActivity extends AppCompatActivity {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
                 Album album = binding.getViewModel().album.get();
-                FotoLineAdapter mAdapter = new FotoLineAdapter(album.getImagens());
+                FotoLineAdapter mAdapter = new FotoLineAdapter(album.retImagensReverse());
                 mFotoRecyclerView.setAdapter(mAdapter);
             }
         });
@@ -101,6 +111,15 @@ public class FotoListActivity extends AppCompatActivity {
 
     public void onCompartilharClick(View view){
         fotoListViewModel.onCompartilharClick(FotoListActivity.this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // volta para a Activity anterior
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

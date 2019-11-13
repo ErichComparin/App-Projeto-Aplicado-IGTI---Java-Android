@@ -42,6 +42,10 @@ public class Album {
         return imagens;
     }
 
+    public ArrayList<Imagem> retImagensReverse() {
+        return reverseList(imagens);
+    }
+
     public void setImagens(ArrayList<Imagem> imagens) {
         this.imagens = imagens;
     }
@@ -52,5 +56,16 @@ public class Album {
 
     private String createId(){
         return "ALB_" + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    }
+
+    public static <T> ArrayList<T> reverseList(ArrayList<T> list) {
+        int length = list.size();
+        ArrayList<T> result = new ArrayList<T>(length);
+
+        for (int i = length - 1; i >= 0; i--) {
+            result.add(list.get(i));
+        }
+
+        return result;
     }
 }

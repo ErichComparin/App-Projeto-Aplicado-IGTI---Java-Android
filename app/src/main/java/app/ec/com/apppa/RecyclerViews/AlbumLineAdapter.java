@@ -40,7 +40,8 @@ public class AlbumLineAdapter extends RecyclerView.Adapter<AlbumLineHolder> {
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, FotoListActivity.class);
-                intent.putExtra("POS", position);
+                int posInvertida = mAlbuns.size() - 1 - position;
+                intent.putExtra("POS", posInvertida);
                 context.startActivity(intent);
             }
         });
