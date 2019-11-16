@@ -50,6 +50,7 @@ public class FotoListActivity extends AppCompatActivity {
     private FotoListViewModel fotoListViewModel;
     private RecyclerView mFotoRecyclerView;
     private static final int PHOTO_REQUEST_CODE = 102;
+    private int posAlbum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,8 @@ public class FotoListActivity extends AppCompatActivity {
         setupFotoRecycler();
         loadObservables();
 
-        fotoListViewModel.onCreate(getIntent().getIntExtra("POS", 0));
+        posAlbum = getIntent().getIntExtra("POS", 0);
+        fotoListViewModel.onCreate(posAlbum);
 
         // Toolbar - botão voltar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,8 +93,9 @@ public class FotoListActivity extends AppCompatActivity {
         binding.getViewModel().album.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
+                Log.e("eccc", "VIEW onChange");
                 Album album = binding.getViewModel().album.get();
-                FotoLineAdapter mAdapter = new FotoLineAdapter(album.retImagensReverse());
+                FotoLineAdapter mAdapter = new FotoLineAdapter(album.retImagensReverse(), posAlbum);
                 mFotoRecyclerView.setAdapter(mAdapter);
             }
         });

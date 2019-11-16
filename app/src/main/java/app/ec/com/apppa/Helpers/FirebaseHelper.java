@@ -196,7 +196,6 @@ public class FirebaseHelper extends Observable{
         }catch(Exception exception) {
             Log.e("ECERR_FirebaseHelper3", exception.getMessage());
         }
-        notificarObserversUsuarioRD();
     }
 
     public void saveBitmap(Bitmap bmp, String path) throws IOException {
@@ -230,7 +229,6 @@ public class FirebaseHelper extends Observable{
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     insThumb(pathFinal);
-                    //notificarObserversUsuarioRD();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -238,9 +236,11 @@ public class FirebaseHelper extends Observable{
                     Log.e("ECERR_FirebaseHelper2", exception.toString());
                 }
             });
-        } else{
-            notificarObserversUsuarioRD();
         }
+    }
+
+    public String retImagem(int posAlbum, int posFoto){
+        return usuarioRD.getAlbum(posAlbum).getImagem(posFoto).getLink();
     }
 
     //--PÚBLICO-----------------------------

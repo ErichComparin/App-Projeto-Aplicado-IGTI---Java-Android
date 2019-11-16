@@ -68,4 +68,8 @@ public class Album {
 
         return result;
     }
+
+    public Imagem getImagem(int pos) {
+        return imagens.get(pos);
+    }
 }

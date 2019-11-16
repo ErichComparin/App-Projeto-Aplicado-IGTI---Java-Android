@@ -1,6 +1,7 @@
 package app.ec.com.apppa.RecyclerViews;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +12,6 @@ import app.ec.com.apppa.R;
 
 public class FotoLineHolder extends RecyclerView.ViewHolder {
 
-    public TextView foto;
     public ImageView imagem;
 
     public FotoLineHolder(View itemView) {

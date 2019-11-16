@@ -40,6 +40,10 @@ public class CompartilhamentoLineAdapter extends RecyclerView.Adapter<Compartilh
 
     @Override
     public void onBindViewHolder(@NonNull CompartilhamentoLineHolder holder, final int position) {
+
+        Log.e("eccc", "POS: " + position);
+        Log.e("eccc", "SIZE: " + mUsuariosPub.size());
+
         holder.nome.setText(mUsuariosPub.get(position).getNome());
 
         holder.btnCompartilhar.setOnClickListener(new View.OnClickListener(){
