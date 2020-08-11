@@ -83,7 +83,7 @@ O diagrama a seguir representa a arquitetura da aplicação, que utiliza a plata
 # Clone este repositório
 $ git clone https://github.com/ErichComparin/App-Projeto-Aplicado-IGTI---Java-Android.git
 
-# <<firebase>>
+# Adicionar o Firebase ao projeto (https://firebase.google.com/docs/android/setup?hl=pt-br)
 
 # Execute o projeto no Android Studio
 $ cd Proffy-NLW2---ReactJS
@@ -91,3 +91,32 @@ $ cd Proffy-NLW2---ReactJS
 ```
 
 ---
+
+## 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+-   **[Android Studio](https://developer.android.com/studio)**
+
+---
+
+## 🧔 Autor
+
+<img alt="Erich Comparin" src="https://avatars1.githubusercontent.com/u/49964553?s=460&u=cbfeb4a52528866ecd92b23fb86afa9bf1cc4ee2&v=4" width="120px"/>
+
+**Erich Comparin**
+
+[![Linkedin Badge](https://img.shields.io/badge/-Erich_Comparin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=ttps://www.linkedin.com/in/erich-comparin-6923119b/)](https://www.linkedin.com/in/erich-comparin-6923119b/) [![Github Badge](https://img.shields.io/badge/-Erich_Comparin-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/ErichComparin)](https://github.com/ErichComparin) [![Gmail Badge](https://img.shields.io/badge/-erich.comparin@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:erich.comparin@gmail.com)](mailto:erich.comparin@gmail.com)
+
+---
+
+## 📝 Licença
+
+Copyright © 2020 [Erich Comparin](https://github.com/ErichComparin).<br />
+This project is [MIT](./LICENSE) licensed.
+
+---
+
+##  Versões do README
+
+[Português 🇧🇷](./README.md)
