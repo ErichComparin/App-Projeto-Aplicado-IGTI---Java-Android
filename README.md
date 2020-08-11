@@ -63,19 +63,19 @@ O diagrama a seguir representa a arquitetura da aplicação, que utiliza a plata
 ## 🎨 Layout
 
 - Tela de login
-<img alt="Landing Page" src="./readme/mobile1.jpg?raw=true">
+<img width="400" alt="Landing Page" src="./readme/mobile1.jpg?raw=true">
 
 - Tela de cadastro de usuário
-<img alt="Cadastro de aulas" src="./readme/mobile2.jpg?raw=true">
+<img width="400" alt="Cadastro de aulas" src="./readme/mobile2.jpg?raw=true">
 
 - Lista de álbuns
-<img alt="Consulta de aulas" src="./readme/mobile3.jpg?raw=true">
+<img width="400" alt="Consulta de aulas" src="./readme/mobile3.jpg?raw=true">
 
 - Lista de fotos
-<img alt="Consulta de aulas" src="./readme/mobile4.jpg?raw=true">
+<img width="400" alt="Consulta de aulas" src="./readme/mobile4.jpg?raw=true">
 
 - Compartilhamento de álbuns
-<img alt="Consulta de aulas" src="./readme/mobile5.jpg?raw=true">
+<img width="400" alt="Consulta de aulas" src="./readme/mobile5.jpg?raw=true">
 
 ---
 
