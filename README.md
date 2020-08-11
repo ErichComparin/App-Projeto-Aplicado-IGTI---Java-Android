@@ -30,13 +30,16 @@
 ## 💻 Sobre o projeto
 
 O produto pretende solucionar o desafio de manter acessíveis as fotos de um certo evento de forma compartilhada. Este compartilhamento deve ser restrito a um grupo de pessoas, e não público. O usuário poderá capturar uma foto, e esta será sincronizada com todos os usuários cujo álbum esteja compartilhado. Neste mesmo momento, a imagem será armazenada em um ambiente de nuvem, ficando disponível para futuras visualizações. O público alvo se trata de usuários finais que utilizam seus smartphones para capturar fotografias e desejam um armazenamento em nuvem, ao mesmo tempo que o conteúdo seja compartilhado com os usuários desejados.
+
 A aplicação tem por objetivo propiciar a praticidade e economia de tempo em executar a tarefa de compartilhar fotografias com os amigos e a disponibilidade e facilidade de encontrar fotos antigas e suas respectivas informações. Além disto, a solução proporciona a privacidade do conteúdo, sendo que apenas as pessoas desejadas tem acesso ao mesmo. Provém economia no plano de dados, considerando que a comunicação com a nuvem para sincronismo poderá ser realizada apenas quando o dispositivo estiver conectado à uma rede Wi-Fi, e também no espaço de armazenamento do mesmo, possibilitando realizar o download apenas do conteúdo que o usuário escolher.
+
 O diagrama a seguir representa a arquitetura da aplicação, que utiliza a plataforma Firebase do Google com as seguintes finalidades por serviço:
 1. Firebase Realtime Database: banco de dados NoSQL hospedado na nuvem. Armazena os dados da aplicação em JSON e realiza o sincronismo entre os clientes em tempo real.
 2. Firebase Authentication: realiza o cadastro e autenticação dos usuários.
 3. Cloud Storage for Firebase: armazena os arquivos de imagem dos usuários.
-
-<img alt="NextLevelWeek" title="#NextLevelWeek" src="./readme/arq.jpg?raw=true" />
+<p align="center">
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./readme/arq.jpg?raw=true" />
+</p>
 
 ---
 
