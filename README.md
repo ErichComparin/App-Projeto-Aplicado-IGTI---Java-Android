@@ -1,7 +1,7 @@
 <p align="center">
-  <img alt="Tamanho do Repositório" src="https://img.shields.io/github/repo-size/ErichComparin/App-Projeto-Aplicado-IGTI---Java-Android?style=flat-square" />
+  <img alt="Tamanho do Repositório" src="https://img.shields.io/github/repo-size/ErichComparin/App_CompartilhamentoFotos-Android?style=flat-square" />
   
-  <img alt="Último commit" src="https://img.shields.io/github/last-commit/ErichComparin/App-Projeto-Aplicado-IGTI---Java-Android?style=flat-square" />
+  <img alt="Último commit" src="https://img.shields.io/github/last-commit/ErichComparin/App_CompartilhamentoFotos-Android?style=flat-square" />
 
   <a href="https://github.com/ErichComparin">
     <img alt="Feito por Erich Comparin" src="https://img.shields.io/badge/feito%20por-Erich%20Comparin-orange?style=flat-square" />
@@ -84,7 +84,7 @@ O diagrama a seguir representa a arquitetura da aplicação, que utiliza a plata
 ```bash
 
 # Clone este repositório
-$ git clone https://github.com/ErichComparin/App-Projeto-Aplicado-IGTI---Java-Android.git
+$ git clone https://github.com/ErichComparin/App_CompartilhamentoFotos-Android.git
 
 # Adicionar o Firebase ao projeto (https://firebase.google.com/docs/android/setup?hl=pt-br)
 
