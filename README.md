@@ -97,7 +97,7 @@ $ cd Proffy-NLW2---ReactJS
 
 ## 🛠 Tecnologias
 
-As seguintes ferramentas foram usadas na construção do projeto:
+As seguintes tecnologias/ferramentas foram usadas na construção do projeto:
 
 -   **[Android Studio](https://developer.android.com/studio)**
 
