@@ -89,7 +89,6 @@ $ git clone https://github.com/ErichComparin/App_CompartilhamentoFotos-Android.g
 # Adicionar o Firebase ao projeto (https://firebase.google.com/docs/android/setup?hl=pt-br)
 
 # Execute o projeto no Android Studio
-$ cd Proffy-NLW2---ReactJS
 
 ```
 
