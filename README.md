@@ -38,7 +38,7 @@ O diagrama a seguir representa a arquitetura da aplicação, que utiliza a plata
 2. Firebase Authentication: realiza o cadastro e autenticação dos usuários.
 3. Cloud Storage for Firebase: armazena os arquivos de imagem dos usuários.
 <p align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./readme/arq.jpg?raw=true" />
+  <img alt="Sobre" title="#Sobre" src="./readme/arq.jpg?raw=true" />
 </p>
 
 ---
